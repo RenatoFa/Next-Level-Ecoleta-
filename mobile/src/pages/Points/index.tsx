@@ -37,7 +37,7 @@ const Points = () => {
             <View style={styles.itemsContainer}>
 
                 <TouchableOpacity style={styles.item} onPress={() => { }}>
-
+                    <SvgUri width={42} height={42} uri=""/>
 
 
 
