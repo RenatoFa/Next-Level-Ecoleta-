@@ -2,14 +2,29 @@ import React from 'react';
 import { Feather as Icon } from '@expo/vector-icons';
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import Constants from 'expo-constants';
+import { useNavigation} from '@react-navigation/native';
 
 const Detail = () => {
+
+    const navigation =useNavigation();
+
+    function handlenavigateBack(){
+        navigation.goBack();
+    }
+
+    
     
     
 
-    return <View>
+    return (
+    
+    <View style={styles.container}>
+        <TouchableOpacity onPress={handlenavigateBack}>
 
-    </View>
+                <Icon name="arrow-left" size={20} color="#34cb79"/>
+        </TouchableOpacity>
+
+    </View>  )
 };
 const styles = StyleSheet.create({
     container: {
