@@ -40,10 +40,16 @@ const Points = () => {
                                 latitude: -22.3016411,
                                 longitude: -42.54115315,
                             }}>
-                            <View>
+                            <View style={styles.mapMarkerContainer} >
                                 <Image style={styles.mapMarkerImage} source={{
                                     uri: 'https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60'
                                 }} />
+                                <Text style={styles.mapMarkerTitle}>Mercado</Text>
+
+
+
+
+
 
                             </View>
 
