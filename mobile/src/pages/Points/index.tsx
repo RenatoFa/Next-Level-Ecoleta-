@@ -27,7 +27,13 @@ const Points = () => {
 
                 <View style={styles.mapContainer}>
 
-                    <MapView style={styles.map} />
+                    <MapView  style={styles.map} initialRegion={{
+                        latitude: -22.3016411,
+                        longitude:-42.541153,15,
+                        latitudeDelta:0,
+                        longitudeDelta:0
+
+                    }} />
 
 
                 </View>
@@ -36,7 +42,8 @@ const Points = () => {
             </View>
             <View style={styles.itemsContainer}>
 
-                <ScrollView horizontal 
+                <ScrollView 
+                horizontal 
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={{
                     paddingHorizontal:20
