@@ -4,7 +4,7 @@ import { Feather as Icon } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import MapView from 'react-native-maps'
-import {SvgUri} from 'react-native-svg';
+import { SvgUri } from 'react-native-svg';
 
 const Points = () => {
 
@@ -15,39 +15,39 @@ const Points = () => {
     }
 
     return (
-    <>
-        <View style={styles.container}>
+        <>
+            <View style={styles.container}>
 
-            <TouchableOpacity onPress={handleNavigationBack}>
-                <Icon name="arrow-left" size={28} color="#34cb79" />
-            </TouchableOpacity>
+                <TouchableOpacity onPress={handleNavigationBack}>
+                    <Icon name="arrow-left" size={28} color="#34cb79" />
+                </TouchableOpacity>
 
-            <Text style={styles.title}>Bem Vindo.</Text>
-            <Text style={styles.description}>Encontre no mapa um pponto de coleta.</Text>
+                <Text style={styles.title}>Bem Vindo.</Text>
+                <Text style={styles.description}>Encontre no mapa um pponto de coleta.</Text>
 
-            <View style={styles.mapContainer}>
+                <View style={styles.mapContainer}>
 
-                <MapView style={styles.map} />
+                    <MapView style={styles.map} />
+
+
+                </View>
 
 
             </View>
+            <View style={styles.itemsContainer}>
 
-
-        </View>
-        <View style={styles.itemsContainer}>
-
-            <TouchableOpacity style={styles.item} onPress={()=>{}}>
-              
+                <TouchableOpacity style={styles.item} onPress={() => { }}>
 
 
 
-            </TouchableOpacity>
 
-        </View>
-        
+                </TouchableOpacity>
+
+            </View>
+
         </>)
 
-        
+
 };
 
 const styles = StyleSheet.create({
