@@ -34,7 +34,9 @@ const Points = () => {
                         longitudeDelta:0.014,
 
                     }} >
-                        <Marker coordinate={{
+                        <Marker 
+                        style={styles.mapMarker}
+                        coordinate={{
                             latitude: -22.3016411,
                             longitude:-42.54115315,
                         } }>
