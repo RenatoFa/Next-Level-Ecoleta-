@@ -4,6 +4,7 @@ import { Feather as Icon } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import MapView from 'react-native-maps'
+import {SvgUri} from 'react-native-svg';
 
 const Points = () => {
 
