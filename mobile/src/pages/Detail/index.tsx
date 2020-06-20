@@ -1,9 +1,9 @@
 import React from 'react';
-import { Feather as Icon } from '@expo/vector-icons';
+import { Feather as Icon, FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, TouchableOpacity, Image, Text } from 'react-native'
 import Constants from 'expo-constants';
 import { useNavigation } from '@react-navigation/native';
-import {RectButton} from 'react-native-gesture-handler'
+import { RectButton } from 'react-native-gesture-handler'
 
 const Detail = () => {
 
@@ -36,6 +36,35 @@ const Detail = () => {
                     <Text style={styles.addressContent}>Rio do Sul , Sc</Text>
 
                 </View>
+            </View>
+
+            <View style={styles.footer}>
+
+                <RectButton style={styles.button} onPress={() => {
+
+                }}>
+
+                    <FontAwesome name='whatsapp' size={20} color='#FFF' />
+
+                    <Text style={styles.buttonText}>Whatsapp</Text>
+
+ 
+                </RectButton>
+
+                <RectButton style={styles.button} onPress={() => {
+
+                }}>
+
+                    <FontAwesome name='mail' size={20} color='#FFF' />
+
+                    <Text style={styles.buttonText}>E-mail</Text>
+
+
+                </RectButton>
+
+
+
+
             </View>
 
 
