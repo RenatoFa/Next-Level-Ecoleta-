@@ -1,30 +1,46 @@
 import React from 'react';
 import { Feather as Icon } from '@expo/vector-icons';
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Image, Text } from 'react-native'
 import Constants from 'expo-constants';
-import { useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const Detail = () => {
 
-    const navigation =useNavigation();
+    const navigation = useNavigation();
 
-    function handlenavigateBack(){
+    function handlenavigateBack() {
         navigation.goBack();
     }
 
-    
-    
-    
+
+
+
 
     return (
-    
-    <View style={styles.container}>
-        <TouchableOpacity onPress={handlenavigateBack}>
 
-                <Icon name="arrow-left" size={20} color="#34cb79"/>
-        </TouchableOpacity>
+        <>
+            <View style={styles.container}>
+                <TouchableOpacity onPress={handlenavigateBack}>
 
-    </View>  )
+                    <Icon name="arrow-left" size={20} color="#34cb79" />
+                </TouchableOpacity>
+
+                <Image style={styles.pointImage} source={{ uri: 'https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60' }} />
+
+                <Text style={styles.pointImage}>Mercadão do João</Text>
+                <Text style={styles.pointItems} >Lâmpadas,Óleo de Cozinha</Text>
+
+                <View style={styles.address} >
+                    <Text style={styles.addressTitle}>Endereço</Text>
+                    <Text style={styles.addressContent}>Rio do Sul , Sc</Text>
+
+                </View>
+            </View>
+        </>
+
+
+
+    )
 };
 const styles = StyleSheet.create({
     container: {
