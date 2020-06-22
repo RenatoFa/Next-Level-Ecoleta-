@@ -6,13 +6,24 @@ import MapView, { Marker } from 'react-native-maps'
 import { SvgUri } from 'react-native-svg';
 import api from '../../services/api';
 
+
+interface Item{
+    id: number,
+    title: string,
+    image_url: string,
+}
+
 const Points = () => {
 
     const navigation = useNavigation()
 
+    const[items,setItems]= useState<Item[ ]>([]);
+
     useEffect(()=>{
 
         api.get('items').then(response =>{
+
+            setItems(response.data);
 
         });
 
