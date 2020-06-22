@@ -1,14 +1,22 @@
-import React from 'react';
-import Constants from 'expo-constants'
+import React,{useState,useEffect } from 'react';
 import { Feather as Icon } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image , SafeAreaView} from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import { SvgUri } from 'react-native-svg';
+import api from '../../services/api';
 
 const Points = () => {
 
     const navigation = useNavigation()
+
+    useEffect(()=>{
+
+        api.get('items').then(response =>{
+
+        });
+
+    },[]);
 
     function handleNavigationBack() {
         navigation.goBack();
