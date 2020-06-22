@@ -1,7 +1,6 @@
 import React from 'react';
 import { Feather as Icon, FontAwesome } from '@expo/vector-icons';
-import { View, StyleSheet, TouchableOpacity, Image, Text } from 'react-native'
-import Constants from 'expo-constants';
+import { View, StyleSheet, TouchableOpacity, SafeAreaView, Image, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler'
 
@@ -19,16 +18,22 @@ const Detail = () => {
 
     return (
 
-        <>
+        <SafeAreaView style={{flex:1}}>
             <View style={styles.container}>
                 <TouchableOpacity onPress={handlenavigateBack}>
 
-                    <Icon name="arrow-left" size={20} color="#34cb79" />
+                    <Icon name="arrow-left" size={32} color="#34cb79" style={{
+                        right:8,
+                        top:16,
+                        
+                         
+                        
+                    }}/>
                 </TouchableOpacity>
 
                 <Image style={styles.pointImage} source={{ uri: 'https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60' }} />
 
-                <Text style={styles.pointImage}>Mercadão do João</Text>
+                <Text style={styles.pointName}>Mercadão do João</Text>
                 <Text style={styles.pointItems} >Lâmpadas,Óleo de Cozinha</Text>
 
                 <View style={styles.address} >
@@ -40,44 +45,42 @@ const Detail = () => {
 
             <View style={styles.footer}>
 
-                <RectButton style={styles.button} onPress={() => {
+                <RectButton style={styles.button} onPress={() => { }}>
 
-                }}>
+                    <FontAwesome name="whatsapp" size={20} color="#FFF" />
+                    <Text style={styles.buttonText}>Whatsapps</Text>
 
-                    <FontAwesome name='whatsapp' size={20} color='#FFF' />
-
-                    <Text style={styles.buttonText}>Whatsapp</Text>
-
- 
                 </RectButton>
 
-                <RectButton style={styles.button} onPress={() => {
-
-                }}>
-
-                    <FontAwesome name='mail' size={20} color='#FFF' />
-
+                <RectButton style={styles.button} onPress={() => { }}>
+                    <Icon name="mail" size={20} color="#FFF" />
                     <Text style={styles.buttonText}>E-mail</Text>
 
 
+
+
+
                 </RectButton>
 
 
 
+
+ 
 
             </View>
 
 
-        </>
+        </SafeAreaView>
 
 
 
-    )
+    );
 };
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 32,
+        padding: 32,  
         paddingTop: 20,
     },
 
@@ -108,6 +111,7 @@ const styles = StyleSheet.create({
         marginTop: 32,
     },
 
+
     addressTitle: {
         color: '#322153',
         fontFamily: 'Roboto_500Medium',
@@ -125,6 +129,7 @@ const styles = StyleSheet.create({
         borderTopWidth: StyleSheet.hairlineWidth,
         borderColor: '#999',
         paddingVertical: 20,
+        paddingBottom:0,
         paddingHorizontal: 32,
         flexDirection: 'row',
         justifyContent: 'space-between'
@@ -147,5 +152,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto_500Medium',
     },
 });
+
 
 export default Detail;
