@@ -20,10 +20,7 @@ interface Points{
     image: string,
     latitude: number,
     longitude: number,
-    items:{
-        title: string;
-
-    }[]; // simbolizar quer é mais de um
+ 
 
 }
 
@@ -36,7 +33,7 @@ const Points = () => {
     //Salvar a posição do Usuario (Estado)  
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]) // começar o vetor com 0
     // Estado para salvar as variaveis do Ponto
-    const [points,setPoints]
+    const [points,setPoints]= useState<number[]>([]);
     const navigation = useNavigation()
 
 
@@ -84,6 +81,8 @@ const Points = () => {
 
             }
         }).then(response => {
+
+            setPoints(response.data)
 
         })
 
