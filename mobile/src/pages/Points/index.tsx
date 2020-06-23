@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Feather as Icon } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
-import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image, SafeAreaView } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image, SafeAreaView,Alert} from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import { SvgUri } from 'react-native-svg';
 import * as Location from 'expo-location'; // exporta todas as funçoes com * 
@@ -16,17 +16,31 @@ interface Item {
 
 const Points = () => {
     
-    //Items
+    //Items(Estado)
     const [items, setItems] = useState<Item[]>([]);
-    //items selecionados
+    //items selecionados(Estado)
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
+    //Salvar a posição do Usuario (Estado)  
+    const[initialPosition,setInitialPosition]= useState<[number,number]>([0,0]) // começar o vetor com 0
     const navigation = useNavigation()
     
     
     // Pedir permição do usuario para pegar sua localização 
     useEffect(()=>{
        async function loadPosition(){
-            
+             const { status}= await  Location.requestPermissionsAsync(); // saber se ele deu permição 
+
+             if(status !== 'granted'){
+                  Alert.alert('Oooops...','Precisamos de sua permissão para obter a localização')
+                  return;
+             }
+             
+             // Vai me retornar a posição do usuario
+             const location = await Location.getCurrentPositionAsync();
+
+             const {latitude,longitude} = location.coords;
+
+
        }
 
        loadPosition();
