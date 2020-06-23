@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Feather as Icon } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
-import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image, SafeAreaView,Alert} from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image, SafeAreaView, Alert } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import { SvgUri } from 'react-native-svg';
 import * as Location from 'expo-location'; // exporta todas as funçoes com * 
@@ -15,36 +15,38 @@ interface Item {
 }
 
 const Points = () => {
-    
+
     //Items(Estado)
     const [items, setItems] = useState<Item[]>([]);
     //items selecionados(Estado)
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
     //Salvar a posição do Usuario (Estado)  
-    const[initialPosition,setInitialPosition]= useState<[number,number]>([0,0]) // começar o vetor com 0
+    const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]) // começar o vetor com 0
     const navigation = useNavigation()
-    
-    
+
+
     // Pedir permição do usuario para pegar sua localização 
-    useEffect(()=>{
-       async function loadPosition(){
-             const { status}= await  Location.requestPermissionsAsync(); // saber se ele deu permição 
+    useEffect(() => {
+        async function loadPosition() {
+            const { status } = await Location.requestPermissionsAsync(); // saber se ele deu permição 
 
-             if(status !== 'granted'){
-                  Alert.alert('Oooops...','Precisamos de sua permissão para obter a localização')
-                  return;
-             }
-             
-             // Vai me retornar a posição do usuario
-             const location = await Location.getCurrentPositionAsync();
+            if (status !== 'granted') {
+                Alert.alert('Oooops...', 'Precisamos de sua permissão para obter a localização')
+                return;
+            }
 
-             const {latitude,longitude} = location.coords;
+            // Vai me retornar a posição do usuario
+            const location = await Location.getCurrentPositionAsync();
+
+            const { latitude, longitude } = location.coords;
+
+            setInitialPosition([latitude, longitude])
 
 
-       }
+        }
 
-       loadPosition();
-    },[]);
+        loadPosition();
+    }, []);
 
 
     //Use effect para os Items no Points
@@ -66,13 +68,13 @@ const Points = () => {
         navigation.navigate('Detail')
     }
 
-    function handleSelectItem(id:number){
-        const alreadySelected = selectedItems.findIndex(item => item===id)
-        if(alreadySelected >=0 ){
+    function handleSelectItem(id: number) {
+        const alreadySelected = selectedItems.findIndex(item => item === id)
+        if (alreadySelected >= 0) {
             const filteredItems = selectedItems.filter(item => item !== id);
             setSelectedItems(filteredItems);
-        }else{
-            setSelectedItems([...selectedItems,id]);
+        } else {
+            setSelectedItems([...selectedItems, id]);
         }
     }
 
@@ -88,41 +90,11 @@ const Points = () => {
                 </TouchableOpacity>
 
                 <Text style={styles.title}>Bem Vindo.</Text>
-                <Text style={styles.description}>Encontre no mapa um pponto de coleta.</Text>
+                <Text style={styles.description}>Encontre no mapa um ponto de coleta.</Text>
 
                 <View style={styles.mapContainer}>
 
-                    <MapView style={styles.map} initialRegion={{
-                        latitude: -22.3016411,
-                        longitude: -42.54115315,
-                        latitudeDelta: 0.014,
-                        longitudeDelta: 0.014,
 
-                    }} >
-                        <Marker
-                            onPress={handleNavigateToDetail}
-                            style={styles.mapMarker}
-                            coordinate={{
-                                latitude: -22.3016411,
-                                longitude: -42.54115315,
-                            }}>
-                            <View style={styles.mapMarkerContainer} >
-                                <Image style={styles.mapMarkerImage} source={{
-                                    uri: 'https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60'
-                                }} />
-                                <Text style={styles.mapMarkerTitle}>Mercado</Text>
-
-
-
-
-
-
-                            </View>
-
-
-
-                        </Marker>
-                    </MapView>
 
 
                 </View>
@@ -140,14 +112,14 @@ const Points = () => {
                 >
 
                     {items.map(item => ( // Toda vez que faz um map , precisamos criar uma props chammada key
-                        <TouchableOpacity 
-                        key={String(item.id)} 
-                        style={[
-                            styles.item,
-                            selectedItems.includes(item.id)? styles.selectedItem:{}   // passando um vetor com varios styles 
-                        ]} 
-                        onPress={()=> handleSelectItem(item.id)}
-                        activeOpacity={0.6}>
+                        <TouchableOpacity
+                            key={String(item.id)}
+                            style={[
+                                styles.item,
+                                selectedItems.includes(item.id) ? styles.selectedItem : {}   // passando um vetor com varios styles 
+                            ]}
+                            onPress={() => handleSelectItem(item.id)}
+                            activeOpacity={0.6}>
                             <SvgUri width={42} height={42} uri={item.image_url} />
                             <Text style={styles.itemTitle} >{item.title} </Text>
 
