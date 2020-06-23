@@ -21,6 +21,7 @@ interface Points{
     latitude: number,
     longitude: number,
     items:{
+        title: string;
 
     }[]; // simbolizar quer é mais de um
 
