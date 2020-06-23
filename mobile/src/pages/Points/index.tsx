@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image, SafeAreaView } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import { SvgUri } from 'react-native-svg';
+import * as Location from 'expo-location'; // exporta todas as funçoes com * 
 import api from '../../services/api';
 
 
@@ -20,6 +21,16 @@ const Points = () => {
     //items selecionados
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
     const navigation = useNavigation()
+    
+    
+    // Pedir permição do usuario para pegar sua localização 
+    useEffect(()=>{
+       async function loadPosition(){
+            
+       }
+
+       loadPosition();
+    },[]);
 
 
     //Use effect para os Items no Points
@@ -117,7 +128,10 @@ const Points = () => {
                     {items.map(item => ( // Toda vez que faz um map , precisamos criar uma props chammada key
                         <TouchableOpacity 
                         key={String(item.id)} 
-                        style={styles.item} 
+                        style={[
+                            styles.item,
+                            selectedItems.includes(item.id)? styles.selectedItem:{}   // passando um vetor com varios styles 
+                        ]} 
                         onPress={()=> handleSelectItem(item.id)}
                         activeOpacity={0.6}>
                             <SvgUri width={42} height={42} uri={item.image_url} />
