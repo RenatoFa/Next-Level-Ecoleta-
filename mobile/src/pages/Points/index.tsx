@@ -14,13 +14,13 @@ interface Item {
     image_url: string,
 }
 
-interface Points{ 
-    id:number,
+interface Points {
+    id: number,
     name: string,
     image: string,
     latitude: number,
     longitude: number,
- 
+
 
 }
 
@@ -33,7 +33,7 @@ const Points = () => {
     //Salvar a posição do Usuario (Estado)  
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]) // começar o vetor com 0
     // Estado para salvar as variaveis do Ponto
-    const [points,setPoints]= useState<number[]>([]);
+    const [points, setPoints] = useState<number[]>([]);
     const navigation = useNavigation()
 
 
@@ -72,12 +72,12 @@ const Points = () => {
 
     }, []);
 
-    useEffect(()=>{
-        api.get('points',{
-            params:{
+    useEffect(() => {
+        api.get('points', {
+            params: {
                 city: 'Rio do Sul',
-                uf:'SC',
-                items: [1,2]
+                uf: 'SC',
+                items: [1, 2]
 
             }
         }).then(response => {
@@ -86,7 +86,7 @@ const Points = () => {
 
         })
 
-    },[])
+    }, [])
 
     function handleNavigationBack() {
         navigation.goBack();
@@ -122,41 +122,43 @@ const Points = () => {
 
                 <View style={styles.mapContainer}>
 
-                {initialPosition[0]!== 0 && (
-                    <MapView style={styles.map} 
-                    initialRegion={{
-                        latitude: initialPosition[0],
-                        longitude: initialPosition[1],
-                        latitudeDelta: 0.014,
-                        longitudeDelta: 0.014,
+                    {initialPosition[0] !== 0 && (
+                        <MapView style={styles.map}
+                            initialRegion={{
+                                latitude: initialPosition[0],
+                                longitude: initialPosition[1],
+                                latitudeDelta: 0.014,
+                                longitudeDelta: 0.014,
 
-                    }}
-                     >
-                        <Marker
-                            onPress={handleNavigateToDetail}
-                            style={styles.mapMarker}
-                            coordinate={{
-                                latitude: -22.3016411,
-                                longitude: -42.54115315,
-                            }}>
-                            <View style={styles.mapMarkerContainer} >
-                                <Image style={styles.mapMarkerImage} source={{
-                                    uri: 'https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60'
-                                }} />
-                                <Text style={styles.mapMarkerTitle}>Mercado</Text>
-
-
-
+                            }}
+                        >
+                            {points.map(point => (
+                                <Marker
+                                    onPress={handleNavigateToDetail}
+                                    style={styles.mapMarker}
+                                    coordinate={{
+                                        latitude: -22.3016411,
+                                        longitude: -42.54115315,
+                                    }}>
+                                    <View style={styles.mapMarkerContainer} >
+                                        <Image style={styles.mapMarkerImage} source={{
+                                            uri: 'https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60'
+                                        }} />
+                                        <Text style={styles.mapMarkerTitle}>Mercado</Text>
 
 
 
-                            </View>
 
 
 
-                        </Marker>
-                    </MapView>
-                )}
+                                    </View>
+
+
+
+                                </Marker>
+                            ))}
+                        </MapView>
+                    )}
 
 
                 </View>
