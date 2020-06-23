@@ -14,8 +14,11 @@ interface Item {
 }
 
 const Points = () => {
-
+    
+    //Items
     const [items, setItems] = useState<Item[]>([]);
+    //items selecionados
+    const [selectedItems, setSelectedItems] = useState<number[]>([]);
     const navigation = useNavigation()
 
 
@@ -36,6 +39,16 @@ const Points = () => {
 
     function handleNavigateToDetail() {
         navigation.navigate('Detail')
+    }
+
+    function handleSelectItem(id:number){
+        const alreadySelected = selectedItems.findIndex(item => item===id)
+        if(alreadySelected >=0 ){
+            const filteredItems = selectedItems.filter(item => item !== id);
+            setSelectedItems(filteredItems);
+        }else{
+            setSelectedItems([...selectedItems,id]);
+        }
     }
 
     return (
