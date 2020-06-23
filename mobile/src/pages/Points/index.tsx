@@ -14,6 +14,18 @@ interface Item {
     image_url: string,
 }
 
+interface Points{ 
+    id:number,
+    name: string,
+    image: string,
+    latitude: number,
+    longitude: number,
+    items:{
+
+    }[]; // simbolizar quer é mais de um
+
+}
+
 const Points = () => {
 
     //Items(Estado)
@@ -22,6 +34,8 @@ const Points = () => {
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
     //Salvar a posição do Usuario (Estado)  
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]) // começar o vetor com 0
+    // Estado para salvar as variaveis do Ponto
+    const [points,setPoints]
     const navigation = useNavigation()
 
 
@@ -59,6 +73,20 @@ const Points = () => {
         });
 
     }, []);
+
+    useEffect(()=>{
+        api.get('points',{
+            params:{
+                city: 'Rio do Sul',
+                uf:'SC',
+                items: [1,2]
+
+            }
+        }).then(response => {
+
+        })
+
+    },[])
 
     function handleNavigationBack() {
         navigation.goBack();
