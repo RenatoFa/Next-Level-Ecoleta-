@@ -3,6 +3,7 @@ import { Feather as Icon, FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, TouchableOpacity, SafeAreaView, Image, Text } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
+import * as MailComposer from 'expo-mail-composer';
 import api from '../../services/api';
 
 interface Params {
@@ -38,6 +39,13 @@ const Detail = () => {
             setData(response.data);
         });
     }, []);
+
+    function handleComposeMail(){
+        MailComposer.composeAsync({
+             subject: 'Interesse na coleta dos resíduos',
+             recipients: [data.point.email],
+        })
+    }
 
 
     function handlenavigateBack() {
@@ -85,7 +93,7 @@ const Detail = () => {
 
                 </RectButton>
 
-                <RectButton style={styles.button} onPress={() => { }}>
+                <RectButton style={styles.button} onPress={handleComposeMail}>
                     <Icon name="mail" size={20} color="#FFF" />
                     <Text style={styles.buttonText}>E-mail</Text>
 
