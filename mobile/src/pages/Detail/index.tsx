@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Feather as Icon, FontAwesome } from '@expo/vector-icons';
-import { View, StyleSheet, TouchableOpacity, SafeAreaView, Image, Text } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, SafeAreaView, Image, Text , Linking} from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import * as MailComposer from 'expo-mail-composer';
@@ -52,6 +52,11 @@ const Detail = () => {
         navigation.goBack();
     }
 
+    function handleWhatsapp(){
+
+        Linking.openURL(`Whatsapp://send?phone=${data.point.whatsapp}&text=Tenho interesse sobre coleta de resíduos `)
+
+    }
 
     if (!data.point) {
         return null;
@@ -86,7 +91,7 @@ const Detail = () => {
 
             <View style={styles.footer}>
 
-                <RectButton style={styles.button} onPress={() => { }}>
+                <RectButton style={styles.button} onPress={handleWhatsapp}>
 
                     <FontAwesome name="whatsapp" size={20} color="#FFF" />
                     <Text style={styles.buttonText}>Whatsapps</Text>
