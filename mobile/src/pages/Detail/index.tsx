@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Feather as Icon, FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, TouchableOpacity, SafeAreaView, Image, Text } from 'react-native'
-import { useNavigation } from '@react-navigation/native';
-import { RectButton } from 'react-native-gesture-handler'
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { RectButton } from 'react-native-gesture-handler';
+import api from '../../services/api';
+
+interface Params {
+    point_id: number;
+}
+
 
 const Detail = () => {
 
     const navigation = useNavigation();
+
+    const route = useRoute();
+
+    const routeParams = route.params as Params; // O typesript entende que esse objeto assume a forma do Params
+    
+    
+
 
     function handlenavigateBack() {
         navigation.goBack();
@@ -18,17 +31,17 @@ const Detail = () => {
 
     return (
 
-        <SafeAreaView style={{flex:1}}>
+        <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
                 <TouchableOpacity onPress={handlenavigateBack}>
 
                     <Icon name="arrow-left" size={32} color="#34cb79" style={{
-                        right:8,
-                        top:16,
-                        
-                         
-                        
-                    }}/>
+                        right: 8,
+                        top: 16,
+
+
+
+                    }} />
                 </TouchableOpacity>
 
                 <Image style={styles.pointImage} source={{ uri: 'https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60' }} />
@@ -65,7 +78,7 @@ const Detail = () => {
 
 
 
- 
+
 
             </View>
 
@@ -80,7 +93,7 @@ const Detail = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 32,  
+        padding: 32,
         paddingTop: 20,
     },
 
@@ -129,7 +142,7 @@ const styles = StyleSheet.create({
         borderTopWidth: StyleSheet.hairlineWidth,
         borderColor: '#999',
         paddingVertical: 20,
-        paddingBottom:0,
+        paddingBottom: 0,
         paddingHorizontal: 32,
         flexDirection: 'row',
         justifyContent: 'space-between'
