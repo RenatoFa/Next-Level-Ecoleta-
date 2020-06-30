@@ -37,11 +37,12 @@ const Points = () => {
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]) // começar o vetor com 0
     // Estado para salvar as variaveis do Ponto
     const [points, setPoints] = useState<Point[]>([]);
+    
     const navigation = useNavigation();
 
 
 
-
+    //react-native-picker-select 
 
 
 

@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Feather as Icon } from '@expo/vector-icons' // Icones
 import { View, ImageBackground, Text, Image, StyleSheet } from 'react-native'; //tags
 import { RectButton } from 'react-native-gesture-handler'; //Botão
 import { useNavigation } from '@react-navigation/native'; // Navegação de uma tela para outra
-
+import RNPickerSelect from 'react-native-picker-select';
 
 
 const Home = () => {
-    
-    const navigation = useNavigation(); // Navegação de uma tela para outra
 
-    function handleNavigateToPoints(){ // Crio uma função da Tela de Home Para a Tela de Points
-       navigation.navigate('Points');
-    }
+  const navigation = useNavigation(); // Navegação de uma tela para outra
+
+  function handleNavigateToPoints() { // Crio uma função da Tela de Home Para a Tela de Points
+    navigation.navigate('Points');
+  }
 
 
 
@@ -35,6 +35,15 @@ const Home = () => {
             <Text>
               <Icon name="arrow-right" color="#FFF" size={24} />
             </Text>
+
+            <RNPickerSelect
+            onValueChange={(value) => console.log(value)}
+            items={[
+                { label: 'Football', value: 'football' },
+                { label: 'Baseball', value: 'baseball' },
+                { label: 'Hockey', value: 'hockey' },
+            ]}
+        />
 
           </View>
 
