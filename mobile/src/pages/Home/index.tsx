@@ -3,7 +3,6 @@ import { Feather as Icon } from '@expo/vector-icons' // Icones
 import { View, ImageBackground, Text, Image, StyleSheet, Picker, NativeTouchEvent } from 'react-native'; //tags
 import { RectButton } from 'react-native-gesture-handler'; //Botão
 import { useNavigation } from '@react-navigation/native'; // Navegação de uma tela para outra
-import RNPickerSelect from 'react-native-picker-select';
 import axios from 'axios';
 
 
@@ -21,9 +20,10 @@ const Home = () => {
 
   const [ufs, setUfs] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
-  const [selectedUf, setSelectUfs] = useState('0');
-  const [selectedCity, setSelectCity] = useState('0');
-
+  const [selectedUf, setSelectUfs] = useState('');
+  const [selectedCity, setSelectCity] = useState('');
+  
+  
   const navigation = useNavigation(); // Navegação de uma tela para outra
 
   useEffect(() => {
@@ -72,8 +72,15 @@ const Home = () => {
 
 
   function handleNavigateToPoints() { // Crio uma função da Tela de Home Para a Tela de Points
-    navigation.navigate('Points');
+    navigation.navigate('Points',{
+      selectedUf,
+      selectedCity
+    });
+    
   }
+  
+  
+  
 
   let myufs = ufs.map(ufss => (
     <Picker.Item label={ufss} value={ufss} key={ufss} />
@@ -84,7 +91,7 @@ const Home = () => {
   })
 
 
-  console.log(cities)
+  
 
 
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Feather as Icon } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation,useRoute } from '@react-navigation/native'
 import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image, SafeAreaView, Alert } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import { SvgUri } from 'react-native-svg';
@@ -27,6 +27,12 @@ interface Point {
 
 }
 
+interface uf_city{
+    uf:string;
+    city:string;
+}
+
+
 const Points = () => {
 
     //Items(Estado)
@@ -40,8 +46,12 @@ const Points = () => {
     
     const navigation = useNavigation();
 
+    const route = useRoute(); 
 
 
+    const routeParams = route.params as uf_city // definindo o formato da variavel
+
+     console.log(routeParams.city , routeParams.uf)
     //react-native-picker-select 
 
 
@@ -84,9 +94,9 @@ const Points = () => {
     useEffect(() => {
         api.get('points', {
             params: {
-                city: 'Rio de Janeiro',
-                uf: 'RJ',
-                items: [1, 2, 6]
+                city: routeParams.city,
+                uf: routeParams.uf,
+                items: selectedItems
 
             }
         }).then(response => {
