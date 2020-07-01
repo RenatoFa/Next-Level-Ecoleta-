@@ -1,14 +1,66 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Feather as Icon } from '@expo/vector-icons' // Icones
-import { View, ImageBackground, Text, Image, StyleSheet } from 'react-native'; //tags
+import { View, ImageBackground, Text, Image, StyleSheet, Picker } from 'react-native'; //tags
 import { RectButton } from 'react-native-gesture-handler'; //Botão
 import { useNavigation } from '@react-navigation/native'; // Navegação de uma tela para outra
 import RNPickerSelect from 'react-native-picker-select';
+import axios from 'axios';
 
 
 const Home = () => {
 
+
+  interface IBGEUFResponse {
+    sigla: string;
+  }
+
+  interface IBGECityResponse {
+    nome: string;
+  }
+
+
+  const [ufs, setUfs] = useState<string[]>([]);
+  const [cities, setCities] = useState<string[]>([]);
+  const [selectedUf, setSelectUfs] = useState('0');
+  const [selectedCity, setSelectCity] = useState('0');
+
   const navigation = useNavigation(); // Navegação de uma tela para outra
+
+  useEffect(() => {
+
+    axios.get<IBGEUFResponse[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados').then(response => {
+      const UfInitials = response.data.map(uf => uf.sigla);
+      setUfs(UfInitials);
+
+    })
+
+  }, []);
+
+  useEffect(() => {
+    if (selectedUf === '0') {
+      return;
+    }
+    axios.get<IBGECityResponse[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUF}/municipios`)').then(response => {
+      const cityNames = response.data.map(city => city.nome)
+      setCities(cityNames);
+    })
+  }, [selectedUf]);
+
+
+
+
+  function handleUf(event: ChangeEvent<HTMLSelectElement>) {
+    const uf = event.target.value;
+    setSelectUfs(uf);
+
+  }
+
+  function handleCity(event: ChangeEvent<HTMLSelectElement>) {
+    const city = event.target.value;
+    setSelectCity(city);
+
+  }
+
 
   function handleNavigateToPoints() { // Crio uma função da Tela de Home Para a Tela de Points
     navigation.navigate('Points');
@@ -22,7 +74,36 @@ const Home = () => {
       <View style={styles.main}>
         <Image source={require('../../assets/logo.png')} />
         <Text style={styles.title}>Seu marketplace de coleta de resíduos</Text>
-        <Text style={styles.description}>Ajudamos pessoas a encoontrarem pontos de coleta de forma eficente.</Text>
+        <Text style={styles.description}>Ajudamos pessoas a encontrarem pontos de coleta de forma eficente.</Text>
+      </View>
+
+      <View style={styles.pickerstyle}>
+        <RNPickerSelect
+          placeholder={{ label: 'Estado', value: null }}
+          onValueChange={(value) => console.log(value)}
+          items={[
+            { label: 'Football', value: 'football' },
+            { label: 'Baseball', value: 'baseball' },
+            { label: 'Hockey', value: 'hockey' },
+          ]}
+        />
+
+      </View>
+
+      <View style={styles.pickerstyle2}>
+        <RNPickerSelect
+          placeholder={{ label: 'Cidade', value: null }}
+          value={selectedUf}
+          onValueChange={handleUf}
+          items={[
+            { label: 'Football', value: 'football' },
+            { label: 'Baseball', value: 'baseball' },
+            { label: 'Hockey', value: 'hockey' },
+          ]}
+         
+
+        />
+
       </View>
 
       <View style={styles.footer}>
@@ -30,28 +111,29 @@ const Home = () => {
           handleNavigateToPoints()
         }}>
 
+
           <View style={styles.buttonIcon} >
 
             <Text>
               <Icon name="arrow-right" color="#FFF" size={24} />
             </Text>
 
-            <RNPickerSelect
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label: 'Football', value: 'football' },
-                { label: 'Baseball', value: 'baseball' },
-                { label: 'Hockey', value: 'hockey' },
-            ]}
-        />
+
 
           </View>
+
+
+
+
+
+
+
 
           <Text style={styles.buttonText}>
 
             Entrar
 
-                </Text>
+          </Text>
 
 
 
@@ -135,6 +217,22 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontFamily: 'Roboto_500Medium',
     fontSize: 16,
+  },
+
+  pickerstyle: {
+
+    top: -60,
+    backgroundColor: '#E5E5E5',
+    borderRadius: 4,
+
+  },
+
+  pickerstyle2: {
+
+    top: -40,
+    backgroundColor: '#E5E5E5',
+    borderRadius: 4,
+
   }
 });
 
