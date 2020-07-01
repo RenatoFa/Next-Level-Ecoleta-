@@ -84,6 +84,7 @@ const CreatePoint = () => {
             const cityNames = response.data.map(city => city.nome)
 
             setCities(cityNames);
+            console.log(setCities(cityNames))
 
 
         });

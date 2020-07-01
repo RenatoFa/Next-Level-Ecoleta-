@@ -1,6 +1,6 @@
-import React, { useState, useEffect, ChangeEvent} from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Feather as Icon } from '@expo/vector-icons' // Icones
-import { View, ImageBackground, Text, Image, StyleSheet, Picker , NativeTouchEvent } from 'react-native'; //tags
+import { View, ImageBackground, Text, Image, StyleSheet, Picker, NativeTouchEvent } from 'react-native'; //tags
 import { RectButton } from 'react-native-gesture-handler'; //Botão
 import { useNavigation } from '@react-navigation/native'; // Navegação de uma tela para outra
 import RNPickerSelect from 'react-native-picker-select';
@@ -37,14 +37,23 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    //Carregar os Municipios sempre que a UF mudar
     if (selectedUf === '0') {
-      return;
+        return;
     }
     axios.get<IBGECityResponse[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`).then(response => {
-      const cityNames = response.data.map(city => city.nome)
-      setCities(cityNames);
+        const cityNames = response.data.map(city => city.nome)
+
+        setCities(cityNames) // Pode ser o problema
+
+       
+
+
     });
-  }, [selectedUf]);
+}, [selectedUf]);
+
+ 
+   
 
 
 
@@ -53,7 +62,7 @@ const Home = () => {
     const uf = event.target.value;
     setSelectUfs(uf);
 
-  } 
+  }
 
   function handleCity(event: ChangeEvent<HTMLSelectElement>) {
     const city = event.target.value;
@@ -66,16 +75,23 @@ const Home = () => {
     navigation.navigate('Points');
   }
 
-  let myufs = ufs.map(ufss=>(
-    <Picker.Item label={ufss} value={ufss} key={ufss}/>
+  let myufs = ufs.map(ufss => (
+    <Picker.Item label={ufss} value={ufss} key={ufss} />
   ))
 
-
-  let mycities = cities.map(cities=>{
-   <Picker.Item label={cities} value={cities} key={cities}/>
+  let mycities = cities.map(city=>{
+    return <Picker.Item label={city} value={city} key={city}  />
   })
-    
+
+
+  console.log(cities)
+
+
+
   
+
+  
+
 
 
   return (
@@ -87,15 +103,15 @@ const Home = () => {
       </View>
 
       <View style={styles.pickerstyle}>
-        <Picker selectedValue={selectedUf} onValueChange={(item,value)=>setSelectUfs(item)}>
+        <Picker selectedValue={selectedUf} onValueChange={(item, value) => setSelectUfs(item)}>
           {myufs}
-          
+
         </Picker>
-        
+
       </View>
 
       <View style={styles.pickerstyle2}>
-        <Picker selectedValue={selectedCity} onValueChange={(item,value)=>setSelectCity(item)}>
+        <Picker selectedValue={selectedCity} onValueChange={(item, value) => setSelectCity(item)}>
           {mycities}
         </Picker>
 
