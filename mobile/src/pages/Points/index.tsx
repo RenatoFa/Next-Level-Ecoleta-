@@ -12,24 +12,24 @@ interface Params {
 }
 
 interface Item {
-    id: number,
-    title: string,
-    image_url: string,
+    id: number;
+    title: string;
+    image_url: string;
 }
 
 interface Point {
-    id: number,
-    name: string,
-    image: string,
-    latitude: number,
-    longitude: number,
+    id: number;
+    name: string;
+    image: string;
+    latitude: number;
+    longitude: number;
 
 
 }
 
 interface uf_city{
-    uf:string;
-    city:string;
+    selectedUf: string;
+    selectedCity: string;
 }
 
 
@@ -49,9 +49,12 @@ const Points = () => {
     const route = useRoute(); 
 
 
-    const routeParams = route.params as uf_city // definindo o formato da variavel
+    const routeParams = route.params as uf_city  ;// definindo o formato da variavel
 
-     console.log(routeParams.city , routeParams.uf)
+    
+   
+
+    
     //react-native-picker-select 
 
 
@@ -94,8 +97,8 @@ const Points = () => {
     useEffect(() => {
         api.get('points', {
             params: {
-                city: routeParams.city,
-                uf: routeParams.uf,
+                city: routeParams.selectedCity,
+                uf: routeParams.selectedUf,
                 items: selectedItems
 
             }
@@ -105,7 +108,7 @@ const Points = () => {
 
         })
 
-    }, [])
+    }, [selectedItems])
 
     function handleNavigationBack() {
         navigation.goBack();
