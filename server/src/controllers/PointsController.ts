@@ -20,7 +20,18 @@ class PointsController {
             .distinct()
             .select('points.*');
 
+        const serializedPoints = points.map(point => {
+            return {
+                ...points,
+                image_url: `http:192.168.1.5:3333/uploads/${point.image}`,
+            }
+        })
+
+
+        
+
         return response.json(points);
+
 
 
     }
@@ -92,7 +103,7 @@ class PointsController {
 
         const pointItems = items
             .split(',')
-            .map((item:string)=>Number(item.trim()))
+            .map((item: string) => Number(item.trim()))
             .map((item_id: number) => {
                 return {
                     item_id,
