@@ -14,10 +14,7 @@ import Dropzone from '../../components/Dropzone/index'
 const CreatePoint = () => {
 
     // array ou objeto: manualmente informar o tipo da variavel
-    interface Props{
-        onFileUploaded: (file:File) => void;
-
-    }
+    
 
 
 
@@ -201,7 +198,7 @@ const CreatePoint = () => {
             <form onSubmit={handleSubmit}>
                 <h1>Cadastro do <br /> ponto de coleta</h1>
 
-                <Dropzone  onFileuploaded ={setSelectedFile}  />
+               <Dropzone onFileUploaded={setSelectedFile}/>
 
                 
 
