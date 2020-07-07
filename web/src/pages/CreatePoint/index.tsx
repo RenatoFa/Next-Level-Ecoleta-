@@ -192,6 +192,8 @@ const CreatePoint = () => {
             <form onSubmit={handleSubmit}>
                 <h1>Cadastro do <br /> ponto de coleta</h1>
 
+                
+
                 <fieldset>
                     <legend>
                         <h2>Dados</h2>
