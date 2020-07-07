@@ -8,6 +8,8 @@ import { LeafletMouseEvent } from 'leaflet';
 import api from '../../services/api';
 import axios from 'axios';
 
+import Dropzone from '../../components/Dropzone/index'
+
 
 const CreatePoint = () => {
 
@@ -191,6 +193,8 @@ const CreatePoint = () => {
             </header>
             <form onSubmit={handleSubmit}>
                 <h1>Cadastro do <br /> ponto de coleta</h1>
+
+                <Dropzone/>
 
                 
 
