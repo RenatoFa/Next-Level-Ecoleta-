@@ -15,7 +15,8 @@ const CreatePoint = () => {
 
     // array ou objeto: manualmente informar o tipo da variavel
     interface Props{
-        
+        onFileUploaded: (file:File) => void;
+
     }
 
 
