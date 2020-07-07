@@ -29,7 +29,12 @@ routes.get('/items', itemsController.index)
 
 //Abrindo uma rota para passaggem dos parametros abaixo
 
-routes.post('/points', upload.single('image'),pointsController.create)
+routes.post(
+    '/points',
+     upload.single('image'),celebrate({
+         
+     }),
+     pointsController.create);
 
 // Buscar um item 
 
