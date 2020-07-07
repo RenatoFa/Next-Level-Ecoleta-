@@ -14,6 +14,11 @@ import Dropzone from '../../components/Dropzone/index'
 const CreatePoint = () => {
 
     // array ou objeto: manualmente informar o tipo da variavel
+    interface Props{
+        
+    }
+
+
 
     interface Item {
         id: number,
@@ -48,6 +53,7 @@ const CreatePoint = () => {
     const [selectedCity, setSelectedCity] = useState('0');// Cria um estado para armazenar a Cidade que o usuario colocou
     const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);// Cria um estado para armazenar a Posição apontada pelo usuario 
     const [selectedItems,setSelectedItems] = useState<number[]>([]) // Cria um estado para armazenar os Itens selecionados pelo usuario
+    const [selectedFile,setSelectedFile] = useState<File>() // Cria um estado para armazenar os arquivos selecionados pelo usuario
     const history = useHistory();
 
     useEffect(() => {
@@ -194,7 +200,7 @@ const CreatePoint = () => {
             <form onSubmit={handleSubmit}>
                 <h1>Cadastro do <br /> ponto de coleta</h1>
 
-                <Dropzone/>
+                <Dropzone  onFileuploaded ={setSelectedFile}  />
 
                 
 
