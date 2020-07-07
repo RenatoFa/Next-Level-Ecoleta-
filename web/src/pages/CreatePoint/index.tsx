@@ -9,7 +9,7 @@ import api from '../../services/api';
 import axios from 'axios';
 
 import Dropzone from '../../components/Dropzone/index'
-import { strict } from 'assert';
+
 
 
 const CreatePoint = () => {
