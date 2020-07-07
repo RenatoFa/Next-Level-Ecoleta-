@@ -50,7 +50,7 @@ class PointsController {
 
         const serializedPoints = {
          
-                ...points,
+                ...point,
                 image_url: `http:192.168.1.5:3333/uploads/${point.image}`,
              
         };
@@ -65,7 +65,7 @@ class PointsController {
         // Join point_items on items.id = point_items.item
 
         return response.json({
-            point,
+            point:serializedPoints,
             items
         });
 
